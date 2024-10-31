@@ -30,9 +30,9 @@ class TestModel extends FlutterFlowModel<TestWidget> {
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;
-  // Stores action output result for [Custom Action - receiveData] action in test widget.
+  // Stores action output result for [Custom Action - receiveData] action in Button widget.
   String? dataaa;
-  // Stores action output result for [Custom Action - receiveAndPlotData] action in test widget.
+  // Stores action output result for [Custom Action - receiveAndPlotData] action in Button widget.
   List<double>? listt;
 
   @override

@@ -41,34 +41,6 @@ class _TestWidgetState extends State<TestWidget> {
       FFAppState().xaxis = [];
       FFAppState().yaxis = [];
       safeSetState(() {});
-      _model.instantTimer = InstantTimer.periodic(
-        duration: Duration(milliseconds: 1000),
-        callback: (timer) async {
-          _model.dataaa = await actions.receiveData(
-            widget!.devicee!,
-          );
-          _model.dataa = valueOrDefault<String>(
-            _model.dataaa,
-            '-',
-          );
-          safeSetState(() {});
-          _model.listt = await actions.receiveAndPlotData(
-            _model.dataaa!,
-          );
-          _model.textT = _model.listt!.toList().cast<double>();
-          safeSetState(() {});
-          FFAppState().addToXaxis(valueOrDefault<double>(
-            _model.listt?.first,
-            0.0,
-          ));
-          FFAppState().addToYaxis(valueOrDefault<double>(
-            _model.listt?.last,
-            0.0,
-          ));
-          safeSetState(() {});
-        },
-        startImmediately: true,
-      );
     });
   }
 
@@ -174,9 +146,9 @@ class _TestWidgetState extends State<TestWidget> {
                                 ),
                                 axisBounds: AxisBounds(
                                   minX: -0.0,
-                                  minY: -1.0,
+                                  minY: -5.0,
                                   maxX: 500.0,
-                                  maxY: 1.0,
+                                  maxY: 5.0,
                                 ),
                                 xAxisLabelInfo: AxisLabelInfo(
                                   reservedSize: 32.0,
@@ -191,6 +163,64 @@ class _TestWidgetState extends State<TestWidget> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              FFButtonWidget(
+                onPressed: () async {
+                  _model.instantTimer = InstantTimer.periodic(
+                    duration: Duration(milliseconds: 1000),
+                    callback: (timer) async {
+                      _model.dataaa = await actions.receiveData(
+                        widget!.devicee!,
+                      );
+                      _model.dataa = _model.dataaa;
+                      safeSetState(() {});
+                      _model.listt = await actions.receiveAndPlotData(
+                        _model.dataaa!,
+                      );
+                      _model.textT = _model.listt!.toList().cast<double>();
+                      safeSetState(() {});
+                      FFAppState().addToXaxis(_model.listt!.first);
+                      FFAppState().addToYaxis(_model.listt!.last);
+                      safeSetState(() {});
+                    },
+                    startImmediately: true,
+                  );
+
+                  safeSetState(() {});
+                },
+                text: 'Start',
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleLarge.override(
+                        fontFamily: 'Montserrat',
+                        letterSpacing: 0.0,
+                      ),
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              FFButtonWidget(
+                onPressed: () async {
+                  _model.instantTimer?.cancel();
+                },
+                text: 'Stop',
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleLarge.override(
+                        fontFamily: 'Montserrat',
+                        letterSpacing: 0.0,
+                      ),
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
             ],
