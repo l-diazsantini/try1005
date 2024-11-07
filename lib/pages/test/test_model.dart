@@ -27,6 +27,8 @@ class TestModel extends FlutterFlowModel<TestWidget> {
   void updateTextTAtIndex(int index, Function(double) updateFn) =>
       textT[index] = updateFn(textT[index]);
 
+  double? amp;
+
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;
@@ -34,6 +36,8 @@ class TestModel extends FlutterFlowModel<TestWidget> {
   String? dataaa;
   // Stores action output result for [Custom Action - receiveAndPlotData] action in Button widget.
   List<double>? listt;
+  // Stores action output result for [Custom Action - getMaxValueAndPosition] action in Button widget.
+  List<dynamic>? amplitude;
 
   @override
   void initState(BuildContext context) {}

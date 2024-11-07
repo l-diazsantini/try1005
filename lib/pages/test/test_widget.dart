@@ -79,7 +79,7 @@ class _TestWidgetState extends State<TestWidget> {
           ),
           title: Text(
             valueOrDefault<String>(
-              _model.dataa,
+              _model.amp?.toString(),
               '-',
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -207,6 +207,16 @@ class _TestWidgetState extends State<TestWidget> {
               FFButtonWidget(
                 onPressed: () async {
                   _model.instantTimer?.cancel();
+                  _model.amplitude = await actions.getMaxValueAndPosition(
+                    FFAppState().yaxis.toList(),
+                  );
+                  _model.amp = valueOrDefault<double>(
+                    _model.amplitude?.first,
+                    0.0,
+                  );
+                  safeSetState(() {});
+
+                  safeSetState(() {});
                 },
                 text: 'Stop',
                 options: FFButtonOptions(
