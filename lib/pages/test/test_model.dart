@@ -29,6 +29,8 @@ class TestModel extends FlutterFlowModel<TestWidget> {
 
   double? amp;
 
+  double? time;
+
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;

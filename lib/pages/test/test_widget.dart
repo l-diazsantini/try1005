@@ -77,17 +77,42 @@ class _TestWidgetState extends State<TestWidget> {
               context.pop();
             },
           ),
-          title: Text(
-            valueOrDefault<String>(
-              _model.amp?.toString(),
-              '-',
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Montserrat',
-                  color: FlutterFlowTheme.of(context).tertiary,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Text(
+                  valueOrDefault<String>(
+                    _model.amp?.toString(),
+                    '-',
+                  ),
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Montserrat',
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        fontSize: 22.0,
+                        letterSpacing: 0.0,
+                      ),
                 ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Text(
+                  valueOrDefault<String>(
+                    _model.time?.toString(),
+                    '-',
+                  ),
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Montserrat',
+                        color: FlutterFlowTheme.of(context).tertiary,
+                        fontSize: 22.0,
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
+            ],
           ),
           actions: [],
           centerTitle: true,
@@ -212,6 +237,11 @@ class _TestWidgetState extends State<TestWidget> {
                   );
                   _model.amp = valueOrDefault<double>(
                     _model.amplitude?.first,
+                    0.0,
+                  );
+                  safeSetState(() {});
+                  _model.time = valueOrDefault<double>(
+                    FFAppState().xaxis[_model.amplitude!.last],
                     0.0,
                   );
                   safeSetState(() {});
